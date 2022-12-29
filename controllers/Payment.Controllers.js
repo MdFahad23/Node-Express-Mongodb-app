@@ -17,7 +17,6 @@ module.exports.ipn = async (req, res) => {
   } else {
     await Order.deleteOne({ transaction_id: tran_id });
   }
-  console.log(req.body);
   await payment.save();
   return res.status(200).send("IPN");
 };
