@@ -13,7 +13,7 @@ module.exports.ipn = async (req, res) => {
       { transaction_id: tran_id },
       { status: "Complete" }
     );
-    await CartItem.deleteMany(order.cartItems);
+    await CartItem.deleteMany();
     await payment.save();
   } else {
     await Order.deleteOne({ transaction_id: tran_id });
