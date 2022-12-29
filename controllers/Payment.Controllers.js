@@ -14,10 +14,11 @@ module.exports.ipn = async (req, res) => {
       { status: "Complete" }
     );
     await CartItem.deleteMany(order.cartItems);
+    await payment.save();
   } else {
     await Order.deleteOne({ transaction_id: tran_id });
+    await payment.save();
   }
-  await payment.save();
   return res.status(200).send("IPN");
 };
 
